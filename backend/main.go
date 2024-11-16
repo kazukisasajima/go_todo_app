@@ -14,7 +14,6 @@ func main() {
     conn := db.GetDBConnection()
     defer conn.Close(context.Background())
 
-    // 必要なテーブルが存在しない場合は作成
     err := db.SetupDatabase(conn)
     if err != nil {
         log.Fatalf("Failed to set up database: %v\n", err)

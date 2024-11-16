@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 interface TodoFormProps {
   onSubmit: (data: { title: string; description: string }) => void;
@@ -11,11 +11,32 @@ const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, isEditing, o
   const [title, setTitle] = useState(initialData?.title || "");
   const [description, setDescription] = useState(initialData?.description || "");
 
+  // initialData が変更されたら title と description を更新
+  useEffect(() => {
+    if (initialData) {
+      setTitle(initialData.title);
+      setDescription(initialData.description);
+    } else {
+      setTitle(""); // 初期値がない場合はリセット
+      setDescription("");
+    }
+  }, [initialData]);
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSubmit({ title, description });
-    setTitle("");
-    setDescription("");
+    if (!isEditing) {
+      setTitle(""); // 新規作成の場合はフォームをクリア
+      setDescription("");
+    }
+  };
+
+  const handleCancel = () => {
+    setTitle(""); // タイトルをリセット
+    setDescription(""); // 説明をリセット
+    if (onCancel) {
+      onCancel();
+    }
   };
 
   return (
@@ -40,10 +61,10 @@ const TodoForm: React.FC<TodoFormProps> = ({ onSubmit, initialData, isEditing, o
         >
           {isEditing ? "更新" : "作成"}
         </button>
-        {isEditing && onCancel && (
+        {isEditing && (
           <button
             type="button"
-            onClick={onCancel}
+            onClick={handleCancel}
             className="w-full py-2 bg-gray-500 text-white rounded cursor-pointer hover:bg-gray-600"
           >
             キャンセル

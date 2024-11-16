@@ -4,9 +4,9 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     volumes:
-      - ./backend:/app # ホストのコードをコンテナにマウント
+      - ./backend:/app
     ports:
-      - "8080:8080" # ホストの8080番ポートをコンテナの8080番ポートにマッピング
+      - "8080:8080"
     container_name: todoapp-backend
     depends_on:
       - db

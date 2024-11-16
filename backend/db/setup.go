@@ -6,7 +6,7 @@ import (
     "log"
 )
 
-// SetupDatabase creates necessary tables if they do not exist
+// 必要なテーブルが存在しない場合は作成
 func SetupDatabase(conn *pgx.Conn) error {
     _, err := conn.Exec(context.Background(), `
         CREATE TABLE IF NOT EXISTS todos (

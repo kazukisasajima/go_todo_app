@@ -29,6 +29,10 @@ const TodoPage: React.FC = () => {
     }
   };
 
+  const handleEditStart = (todo: Todo) => {
+    setEditingTodo(todo);
+  };
+
   const handleEditSubmit = async (data: { title: string; description: string }) => {
     if (!editingTodo) return;
 
@@ -62,19 +66,23 @@ const TodoPage: React.FC = () => {
     }
   };
 
+  const handleCancelEdit = () => {
+    setEditingTodo(null);
+  };
+
   return (
     <div className="App flex justify-center items-center h-screen bg-gray-100">
       <div className="w-full max-w-md p-6 bg-white rounded shadow-md">
-        <h2 className="text-2xl font-semibold mb-4 text-center">Todoリスト with Typescript</h2>
+        <h2 className="text-2xl font-semibold mb-4 text-center">Todoリスト</h2>
         <TodoForm
           onSubmit={editingTodo ? handleEditSubmit : handleAddTodo}
           initialData={editingTodo ? { title: editingTodo.title, description: editingTodo.description } : undefined}
           isEditing={!!editingTodo}
-          onCancel={() => setEditingTodo(null)}
+          onCancel={handleCancelEdit}
         />
         <TodoList
           todos={todos}
-          onEdit={setEditingTodo}
+          onEdit={handleEditStart}
           onDelete={handleDeleteTodo}
           onToggle={handleToggleCompleted}
         />

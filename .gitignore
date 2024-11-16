@@ -1,0 +1,47 @@
+# 環境変数ファイル
+.env
+
+# OS固有のファイル
+.DS_Store
+Thumbs.db
+
+# ログファイル
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+# ビルド成果物
+bin/
+pkg/
+build/
+go.sum
+
+# Go Modules キャッシュ
+/go/pkg/
+/go/bin/
+
+# テストカバレッジ
+*.out
+*.test
+
+
+# Node.js モジュール
+node_modules/
+
+# ビルド成果物
+build/
+dist/
+
+# キャッシュ
+.cache/
+.eslintcache/
+.next/
+
+# React キャッシュ
+public/static/
+public/assets/
+
+# TailwindCSS
+tailwindcss-debug.log
